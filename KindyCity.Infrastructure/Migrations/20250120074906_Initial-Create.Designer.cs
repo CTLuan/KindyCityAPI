@@ -4,6 +4,7 @@ using KindyCity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KindyCity.Infrastructure.Migrations
 {
     [DbContext(typeof(KindyCityContext))]
-    partial class KindyCityContextModelSnapshot : ModelSnapshot
+    [Migration("20250120074906_Initial-Create")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,42 +328,6 @@ namespace KindyCity.Infrastructure.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("EmployeeInfos");
-                });
-
-            modelBuilder.Entity("KindyCity.Domain.Entites.EmployeeRefreshToken", b =>
-                {
-                    b.Property<Guid>("RefreshTokenId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("DeviceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DeviceInfo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Expires")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRevoked")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("RefreshToken")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RefreshTokenId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeRefreshTokens");
                 });
 
             modelBuilder.Entity("KindyCity.Domain.Entites.Employee_Operation", b =>
@@ -724,15 +691,6 @@ namespace KindyCity.Infrastructure.Migrations
                         .HasForeignKey("KindyCity.Domain.Entites.EmployeeInfo", "EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("KindyCity.Domain.Entites.EmployeeRefreshToken", b =>
-                {
-                    b.HasOne("KindyCity.Domain.Entites.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Employee");
                 });

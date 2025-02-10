@@ -1,81 +1,71 @@
 ﻿using KindyCity.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
+using KindyCity.Shared.Models;
+using MediatR;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using KindyCity.Domain.Entites;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
-namespace KindyCity.Domain.Entites
+namespace KindyCity.Application.Commands.EmployeeCommand.Create
 {
-    public class EmployeeInfo
+    public class CreateEmployeeCommand : IRequest<EmployeeDto>
     {
-        [Key, ForeignKey(nameof(Employee))]
         public Guid EmployeeId { get; set; }
-        [MaxLength(10)]
+        public string Email { get; set; } = string.Empty;
+        public DateTime CreateOn { get; set; }
+        public IFormFile?  Avatar { get; set; } 
+        public int Status { get; set; } = 1;
+        public DateTime LastSignInTime { get; set; }
+        [Key, ForeignKey(nameof(Employee))]
         public string EmployeeCode { get; set; } = string.Empty;
-        [MaxLength(255)] 
         public string FullName { get; set; } = string.Empty;
-        [Column(TypeName = "tinyint")]
-        public Sex Sex { get; set; }
-        [MaxLength(10)]
+        public int Sex { get; set; } = 1;
         public string PhoneNumber { get; set; } = string.Empty;
-        [MaxLength(255)]
         public string Facebook { get; set; } = string.Empty;
-        [MaxLength(255)]
         public string Skype { get; set; } = string.Empty;
         public DateTime BirthDay { get; set; }
-        [MaxLength(12)]
         public string CitizenId { get; set; } = string.Empty;
         public DateTime CitizenIDIssuedDate { get; set; }
         [MaxLength]
         public string CitizenIDIssuedPlace { get; set; } = string.Empty;
-        [MaxLength(20)]
         public string Passport { get; set; } = string.Empty;
         public DateTime PassportIssuedDate { get; set; }
         public DateTime PassportIssuedEnd { get; set; }
         [MaxLength]
         public string PassportIssuedPlace { get; set; } = string.Empty;
-        [MaxLength(128)]
         public string Country { get; set; } = string.Empty;
-        [MaxLength(128)]
         public string Nationlity { get; set; } = string.Empty;
-        [Column(TypeName = "tinyint")]
         public NationalityStatus IsVietnamese { get; set; }
-        [ForeignKey(nameof(EthnicityId))]
         public Guid EthnicityId { get; set; }
-        [Column(TypeName = "tinyint")]
         public MaritalStatus MaritalStatus { get; set; }
-        [MaxLength(255)]
         public string PlaceOfOrigin { get; set; } = string.Empty;
-        [MaxLength(255)]
         public string CurrentAddress { get; set; } = string.Empty;
-        [ForeignKey(nameof(ResidenceProvinceId))]
         public Guid ResidenceProvinceId { get; set; }
-        [ForeignKey(nameof(ResidenceDistrictId))]
         public Guid ResidenceDistrictId { get; set; }
-        [ForeignKey(nameof(ResidenceWardId))]
         public Guid ResidenceWardId { get; set; }
-        [ForeignKey(nameof(ResidenceStreetId))]
         public Guid ResidenceStreetId { get; set; }
-        [MaxLength(128)]
         public string Province { get; set; } = string.Empty;
-        [MaxLength(128)]
         public string District { get; set; } = string.Empty;
-        [MaxLength(128)]
         public string Ward { get; set; } = string.Empty;
-        [MaxLength(128)]
         public string Street { get; set; } = string.Empty;
-        [Column(TypeName = "tinyint")]
         public WorkingStatus WorkingStatus { get; set; }
-        [MaxLength(128)]
         public string EmergencyContactPersonName { get; set; } = string.Empty;
-        [MaxLength(128)]
         public string EmergencyContactPersonPhone { get; set; } = string.Empty;
-        [MaxLength(128)]
-        public string EmergencyContactRelationship { get; set; } = string.Empty;
-        public virtual Employee? Employee { get; set; }
-        public virtual EthnicityCategory? EthnicityCategories { get; set; }
-        public virtual ProvinceCategory? ProvinceCategories { get; set; }
-        public virtual DistrictCategory? DistrictCategories { get; set; }
-        public virtual WardCategory? WardCategories { get; set; }
-        public virtual StreetCategory? StreetCategories { get; set; }
+        public Guid EmployeeEducationId { get; set; }
+        public string SchoolName { get; set; } = string.Empty;
+        public string Degree { get; set; } = string.Empty;
+        public string Major { get; set; } = string.Empty;
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public Guid CreateBy { get; set; }
 
+        public Guid ModifiedBy { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 }

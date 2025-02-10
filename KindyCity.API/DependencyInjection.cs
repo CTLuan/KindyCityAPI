@@ -11,7 +11,7 @@ namespace KindyCity.API
     {
         public static IServiceCollection AddKindyCityDI(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddApplicationDI().AddInfrastructureDI(configuration);
+            services.AddApplicationDI(configuration).AddInfrastructureDI(configuration);
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
