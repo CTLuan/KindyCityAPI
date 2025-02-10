@@ -21,7 +21,5 @@ namespace KindyCity.Domain.Entites
         public EmployeeStatus Status { get; set; } = EmployeeStatus.Absent;
         public DateTime LastSignInTime { get; set; }
         public virtual EmployeeInfo? EmployeeInfo { get; set; }
-
-
     }
 }

@@ -27,6 +27,7 @@ namespace KindyCity.Infrastructure.Data
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<Operation> Operations { get; set; }
         public virtual DbSet<Employee_Operation> Employee_Operation { get; set; }
+        public virtual DbSet<EmployeeRefreshToken> EmployeeRefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
